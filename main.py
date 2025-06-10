@@ -72,7 +72,14 @@ df_submission_rf = pd.DataFrame({
 df_submission_rf.to_csv('submission_rf.csv', index=False)
 
 #XGBoost
+xgb_model = modeling.train_xgboost_model(df_train)
+y_pred_xgb = xgb_model.predict(df_test)
+df_submission_xgb = pd.DataFrame({
+    'PassengerId': df_test_raw['PassengerId'],  
+    'Survived': y_pred_xgb
+})
 
+df_submission_xgb.to_csv('submission_xgb.csv', index=False)
 
 
 
